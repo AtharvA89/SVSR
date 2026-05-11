@@ -1,0 +1,32 @@
+int temp_voltage{0};
+int temp{0};
+int temp_pin{A0};
+int sound_pin{8};
+int timestamp{0};
+void setup()
+{
+Serial.begin(9600);
+pinMode(temp_pin, INPUT);
+pinMode(sound_pin, OUTPUT);
+}
+void alert_sound()
+{
+if(temp>50)
+{
+digitalWrite(sound_pin, HIGH);
+}
+else
+{
+digitalWrite(sound_pin, LOW);
+}
+}
+void loop()
+{
+temp_voltage=analogRead(temp_pin);
+temp=map(temp_voltage, 104, 358, 0, 125);
+Serial.println(temp);
+
+Serial.println(timestamp);
+alert_sound();
+delay(100);
+}
